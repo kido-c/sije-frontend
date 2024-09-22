@@ -27,8 +27,10 @@ const GlobalStyles = createGlobalStyle`
     }
     body{
         line-height: 1;
-        background-color: #00000;
-        margin-bottom: 100px;
+        background-color: #000000;
+        color: #ffffff;
+        min-height: 100vh;
+        width: 100%;
     }
     ol, ul{
         list-style: none;

@@ -5,13 +5,18 @@ import GlobalStyles from "./styles/globalStyle";
 import GlobalFonts from "./styles/globalFont.ts";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme.ts";
+import PortalModal from "./components/Modal/components/PortalModal.tsx";
+import { ModalProvider } from "./contexts/ModalProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <GlobalFonts />
-      <App />
-    </ThemeProvider>
+    <ModalProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <GlobalFonts />
+        <PortalModal />
+        <App />
+      </ThemeProvider>
+    </ModalProvider>
   </StrictMode>
 );

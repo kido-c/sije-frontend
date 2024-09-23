@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Header from "./components/Header";
 import GalleryList from "./components/gallery/GalleryList";
+import { useModal } from "./contexts/ModalProvider";
 
 const IMG_SOURCE = [
   {
@@ -30,11 +31,23 @@ const IMG_SOURCE = [
 ];
 
 function App() {
+  const { openModal } = useModal();
+
   return (
     <Container>
       <Header />
       <Warpper>
-        <GalleryList galleryList={IMG_SOURCE} />
+        <GalleryList
+          galleryList={IMG_SOURCE.map((img) => {
+            return {
+              ...img,
+              onClick: () => {
+                console.log("hit");
+                openModal(img.src);
+              },
+            };
+          })}
+        />
       </Warpper>
     </Container>
   );

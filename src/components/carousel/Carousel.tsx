@@ -16,7 +16,7 @@ interface Props {
 export default function Carousel({
   children,
   autoPlay = false,
-  speed = 3000,
+  speed = 2000,
 }: Props) {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
@@ -72,7 +72,7 @@ export default function Carousel({
       }, speed);
       return () => clearInterval(interval);
     }
-  }, [autoPlay, speed]);
+  }, [autoPlay, speed, nextSlide]);
 
   return (
     <Container>

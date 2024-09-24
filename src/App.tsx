@@ -54,7 +54,7 @@ function App() {
     <Container>
       <Header />
       <Warpper>
-        <Carousel autoPlay={false}>
+        <Carousel autoPlay={true}>
           {carouselPhotos.map((img) => (
             <Image key={img.src} src={img.src} alt={img.alt} />
           ))}

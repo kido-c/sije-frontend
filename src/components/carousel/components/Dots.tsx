@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -7,7 +6,7 @@ interface Props {
 }
 
 export default function Dots({ length, currentIdx }: Props) {
-  const dots = useMemo(() => Array.from({ length }, (_, i) => i), []);
+  const dots = Array.from({ length }, (_, i) => i);
 
   return (
     <Container>

@@ -10,7 +10,9 @@ export const PhotoAPI = {
     count: number;
   }): Promise<GetPhotoDTO[]> => {
     const { data } = await axios.get(
-      `${baseURL}/photos/random?client_id=o9gS0R9sTLESEjreJWl334WrCj9Y54uJ24Gd3V0FvQM&count=${count}`
+      `${baseURL}/photos/random?client_id=${
+        import.meta.env.VITE_UPSPLASH_ACC_KEY
+      }&count=${count}`
     );
     return data;
   },

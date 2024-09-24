@@ -83,7 +83,6 @@ const Container = styled.div``;
 
 const Warpper = styled.div`
   width: 100%;
-
   padding: 0 30px;
 `;
 

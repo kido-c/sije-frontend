@@ -125,18 +125,18 @@ const InnerContainer = styled.div`
 `;
 
 const Viewer = styled.div`
+  position: relative;
   width: 100%;
   height: 350px;
   border-radius: 3px;
   overflow: hidden;
-  position: relative;
 `;
 
 const Wrapper = styled.div<{ left?: number; $isDragging: boolean }>`
   position: relative;
-  display: flex;
   width: 100%;
   left: ${(props) => props.left}%;
+  display: flex;
   transition: ${(props) =>
     props.$isDragging ? "none" : "0.5s ease-in-out all"};
   cursor: grab;
@@ -144,24 +144,24 @@ const Wrapper = styled.div<{ left?: number; $isDragging: boolean }>`
 `;
 
 const ImageWrapper = styled.div`
-  flex: 0 0 100%; /* 각 슬라이드가 컨테이너 너비의 100%를 차지 */
+  width: 100%;
+  height: 350px;
+  flex: 0 0 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 350px;
-  overflow: hidden; /* 부모 요소에서 이미지가 넘치는 부분을 숨김 */
+  overflow: hidden;
 `;
 
 const ArrowButton = styled.button`
   width: 30px;
   height: 30px;
-  background-color: ${({ theme }) => theme.colorPallte.gray200};
-  opacity: 0.5;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.colorPallte.gray200};
+  opacity: 0.5;
+  border-radius: 50%;
 `;
 
 const DotWrapper = styled.div`

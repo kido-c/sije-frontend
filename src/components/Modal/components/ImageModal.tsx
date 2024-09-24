@@ -25,7 +25,6 @@ export default function ImageModal({ src, closeModal }: Props) {
 }
 
 const Container = styled.div`
-  border-radius: 10px;
   width: 100%;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.defaultColor.white};

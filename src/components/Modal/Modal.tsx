@@ -52,16 +52,16 @@ export const Overlay = styled.div`
 `;
 
 export const ModalWrap = styled.div`
+  z-index: 12;
+  position: fixed;
+  top: 50%;
+  left: 50%;
   width: 100%;
   max-width: 900px;
   height: 500px;
   border-radius: 15px;
   background-color: ${(props) => props.theme.defaultColor.white};
-  position: fixed;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 12;
 `;
 
 export const Contents = styled.div``;

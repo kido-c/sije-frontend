@@ -30,9 +30,9 @@ export default function GalleryItem({ src, alt, onClick }: Props) {
 
 const Container = styled.div`
   position: relative;
+  height: 0;
   border-radius: 10px;
   overflow: hidden;
-  height: 0;
   padding-top: 50%;
 `;
 

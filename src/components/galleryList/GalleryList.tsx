@@ -1,4 +1,4 @@
-import GalleryItem from "./GalleryItem";
+import GalleryItem from "./components/GalleryItem";
 import { styled } from "styled-components";
 
 interface Props {
@@ -25,7 +25,6 @@ const Container = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   row-gap: 10px;
   column-gap: 20px;
 `;

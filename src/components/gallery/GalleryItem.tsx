@@ -34,7 +34,7 @@ export default function GalleryItem({
 
 const Conatiner = styled.div<{ $width: number; $height: number }>`
   position: relative;
-  width: ${({ $width }) => $width}%;
+  min-width: 100%;
   height: ${({ $height }) => $height}px;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.defaultColor.white};

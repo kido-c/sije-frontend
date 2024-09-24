@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import Header from "./components/Header";
 import GalleryList from "./components/gallery/GalleryList";
 import { useModal } from "./contexts/ModalProvider";
+import Carousel from "./components/carousel/Carousel";
+import GalleryItem from "./components/gallery/GalleryItem";
 
 const IMG_SOURCE = [
   {
@@ -37,17 +39,24 @@ function App() {
     <Container>
       <Header />
       <Warpper>
-        <GalleryList
-          galleryList={IMG_SOURCE.map((img) => {
-            return {
-              ...img,
-              onClick: () => {
-                console.log("hit");
-                openModal(img.src);
-              },
-            };
-          })}
-        />
+        <Carousel autoPlay={true}>
+          {IMG_SOURCE.map((img) => (
+            <GalleryItem key={img.title} src={img.src} alt="" />
+          ))}
+        </Carousel>
+        <ListWrapper>
+          <GalleryList
+            galleryList={IMG_SOURCE.map((img) => {
+              return {
+                ...img,
+                onClick: () => {
+                  console.log("hit");
+                  openModal(img.src);
+                },
+              };
+            })}
+          />
+        </ListWrapper>
       </Warpper>
     </Container>
   );
@@ -61,4 +70,8 @@ const Warpper = styled.div`
   width: 100%;
   height: 100vh;
   padding: 0 30px;
+`;
+
+const ListWrapper = styled.div`
+  margin-top: 20px;
 `;

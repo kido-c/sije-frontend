@@ -10,9 +10,14 @@ function Modal({ children }: Props) {
   const { closeModal } = useModal();
 
   useEffect(() => {
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
     document.body.style.overflow = "hidden";
 
     return () => {
+      document.body.style.paddingRight = "0px";
       document.body.style.overflow = "unset";
     };
   });
@@ -36,7 +41,7 @@ export default Modal;
 
 export const Overlay = styled.div`
   position: fixed;
-  width: 100%;
+  width: cal(100% -10px);
   height: 100%;
   top: 0;
   bottom: 0;

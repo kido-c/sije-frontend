@@ -11,18 +11,18 @@ export default function Dots({ length, currentIdx }: Props) {
   return (
     <Container>
       {dots.map((_, idx) => (
-        <Dot isActive={currentIdx === idx} />
+        <Dot $isActive={currentIdx === idx} key={idx} />
       ))}
     </Container>
   );
 }
 
-const Dot = styled.div<{ isActive: boolean }>`
+const Dot = styled.div<{ $isActive: boolean }>`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: ${({ theme, isActive }) =>
-    isActive ? theme.colorPallte.gray200 : theme.defaultColor.white};
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colorPallte.gray200 : theme.defaultColor.white};
 `;
 
 const Container = styled.div`

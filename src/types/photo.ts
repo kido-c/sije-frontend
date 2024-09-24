@@ -11,6 +11,7 @@ export interface GetPhotoDTO {
   likes: number;
   liked_by_user: boolean;
   description: string;
+  alt_description: string;
   exif: Exif;
   location: Location;
   current_user_collections: UserCollection[];
@@ -92,8 +93,5 @@ interface UserLinks {
 export interface PhotoItem {
   src: string;
   alt: string;
-  title?: string;
-  width?: number;
-  height?: number;
   onClick?: () => void;
 }

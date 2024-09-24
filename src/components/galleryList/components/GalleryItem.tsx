@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import default_image from "../../assets/img/default_sije.png";
+import default_image from "../../../assets/img/default_sije.png";
 
 interface Props {
   src: string;
@@ -17,7 +17,12 @@ export default function GalleryItem({ src, alt, onClick }: Props) {
   return (
     <Container onClick={onClick}>
       <ImageRatio>
-        <ImageWrapper src={src} alt={alt} onError={onError} />
+        <ImageWrapper
+          src={src}
+          alt={alt ? alt : "대체이미지"}
+          onError={onError}
+          loading="lazy"
+        />
       </ImageRatio>
     </Container>
   );

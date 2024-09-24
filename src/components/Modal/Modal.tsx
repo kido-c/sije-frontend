@@ -52,7 +52,7 @@ export const ModalWrap = styled.div`
   height: 400px;
   border-radius: 15px;
   background-color: ${(props) => props.theme.defaultColor.white};
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

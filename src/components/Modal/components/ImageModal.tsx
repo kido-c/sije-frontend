@@ -47,7 +47,8 @@ const CloseButton = styled.button`
 
 const Wrapper = styled.div`
   overflow: hidden;
-  height: 320px;
+  height: 380px;
+  display: flex;
 `;
 
 const Content = styled.img`

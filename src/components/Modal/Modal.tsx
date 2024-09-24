@@ -53,8 +53,8 @@ export const Overlay = styled.div`
 
 export const ModalWrap = styled.div`
   width: 100%;
-  max-width: 600px;
-  height: 400px;
+  max-width: 900px;
+  height: 500px;
   border-radius: 15px;
   background-color: ${(props) => props.theme.defaultColor.white};
   position: fixed;

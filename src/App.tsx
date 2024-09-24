@@ -33,7 +33,7 @@ function App() {
   };
 
   const getRandomPhotos = () => {
-    PhotoAPI.getRandomPhotos({ count: 5 }).then((data) => {
+    PhotoAPI.getRandomPhotos({ count: 30 }).then((data) => {
       seperatePhotos(data);
     });
   };
@@ -48,7 +48,7 @@ function App() {
       <Header />
       <Warpper>
         <Carousel autoPlay={true}>
-          {IMG_SOURCE.map((img) => (
+          {carouselPhotos.map((img) => (
             <GalleryItem key={img.title} src={img.src} alt="" />
           ))}
         </Carousel>

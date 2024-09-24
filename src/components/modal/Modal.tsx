@@ -10,9 +10,14 @@ function Modal({ children }: Props) {
   const { closeModal } = useModal();
 
   useEffect(() => {
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
     document.body.style.overflow = "hidden";
 
     return () => {
+      document.body.style.paddingRight = "0px";
       document.body.style.overflow = "unset";
     };
   });
@@ -36,7 +41,7 @@ export default Modal;
 
 export const Overlay = styled.div`
   position: fixed;
-  width: 100%;
+  width: cal(100% -10px);
   height: 100%;
   top: 0;
   bottom: 0;
@@ -47,16 +52,16 @@ export const Overlay = styled.div`
 `;
 
 export const ModalWrap = styled.div`
-  width: 100%;
-  max-width: 600px;
-  height: 400px;
-  border-radius: 15px;
-  background-color: ${(props) => props.theme.defaultColor.white};
-  position: absolute;
+  z-index: 12;
+  position: fixed;
   top: 50%;
   left: 50%;
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  border-radius: 15px;
+  background-color: ${(props) => props.theme.defaultColor.white};
   transform: translate(-50%, -50%);
-  z-index: 12;
 `;
 
 export const Contents = styled.div``;

@@ -1,11 +1,12 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext, useState } from "react";
 
 // Context 생성
 const ModalContext = createContext({
   imgSrc: "",
   isOpen: false,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  openModal: (src: string) => {},
+  openModal: (_src: string) => {},
   closeModal: () => {},
 });
 

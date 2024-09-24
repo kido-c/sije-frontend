@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from "react";
+import React, { useEffect } from "react";
 import right_arrow from "../../assets/icons/right_arrow.png";
 import left_arrow from "../../assets/icons/left_arrow.png";
 
@@ -10,18 +10,14 @@ interface Props {
   speed?: number;
   autoPlay?: boolean;
   dots?: boolean;
-  style?: {
-    width: string;
-    height: string;
-  };
+  children: React.ReactNode;
 }
 
 export default function Carousel({
   children,
-  style,
   autoPlay = false,
   speed = 3000,
-}: PropsWithChildren<Props>) {
+}: Props) {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   const [currentIdx, setCurrentIdx] = React.useState(0);
@@ -31,7 +27,7 @@ export default function Carousel({
 
   const totalSlides = React.Children.count(children);
 
-  const maxLeft = totalSlides - 1; // 마지막 슬라이드에 대한 계산
+  const maxLeft = totalSlides - 1;
 
   const nextSlide = () => {
     setCurrentIdx((prev) => (prev >= maxLeft ? 0 : prev + 1));
@@ -57,9 +53,8 @@ export default function Carousel({
   const handleMouseUp = () => {
     if (!dragging) return;
 
-    const containerWidth = wrapperRef.current?.offsetWidth ?? 1; // 컨테이너 너비 가져오기
+    const containerWidth = wrapperRef.current?.offsetWidth ?? 1;
     if (Math.abs(offset) > containerWidth / 2) {
-      // 드래그한 거리가 슬라이드 너비의 1/4 이상이면 슬라이드 전환
       if (offset < 0) {
         nextSlide();
       } else {
@@ -75,17 +70,17 @@ export default function Carousel({
       const interval = setInterval(() => {
         nextSlide();
       }, speed);
-      return () => clearInterval(interval); // 컴포넌트가 언마운트되거나 드래그가 시작되면 클리어
+      return () => clearInterval(interval);
     }
-  }, []);
+  }, [autoPlay, speed]);
 
   return (
     <Container>
       <InnerContainer>
         <ArrowButton onClick={prevSlide}>
-          <img src={left_arrow} width={15} />
+          <img src={left_arrow} width={15} alt="이전 이미지 버튼" />
         </ArrowButton>
-        <Viewer width={style?.width ?? "100%"} height={style?.height ?? "100%"}>
+        <Viewer>
           <Wrapper
             ref={wrapperRef}
             left={
@@ -96,13 +91,17 @@ export default function Carousel({
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
-            isDragging={dragging}
+            $isDragging={dragging}
           >
-            {children}
+            {React.Children.map(children, (child) => (
+              <ImageWrapper>
+                {child} {/* 자식 요소가 이미지일 경우 렌더링 */}
+              </ImageWrapper>
+            ))}
           </Wrapper>
         </Viewer>
         <ArrowButton onClick={nextSlide}>
-          <img src={right_arrow} width={15} />
+          <img src={right_arrow} width={15} alt="다음 이미지 버튼" />
         </ArrowButton>
       </InnerContainer>
       <DotWrapper>
@@ -115,6 +114,7 @@ export default function Carousel({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const InnerContainer = styled.div`
@@ -124,36 +124,44 @@ const InnerContainer = styled.div`
   gap: 10px;
 `;
 
-const Viewer = styled.div<{ width: string; height: string }>`
+const Viewer = styled.div`
+  position: relative;
   width: 100%;
   height: 350px;
   border-radius: 3px;
   overflow: hidden;
-  position: relative;
 `;
 
-const Wrapper = styled.div<{ left?: number; isDragging: boolean }>`
-  position: absolute;
-  top: 50%;
-  left: ${(props) => props.left}%;
-  transform: translateY(-50%);
-  display: flex;
+const Wrapper = styled.div<{ left?: number; $isDragging: boolean }>`
+  position: relative;
   width: 100%;
+  left: ${(props) => props.left}%;
+  display: flex;
   transition: ${(props) =>
-    props.isDragging ? "none" : "0.5s ease-in-out all"};
+    props.$isDragging ? "none" : "0.5s ease-in-out all"};
   cursor: grab;
   user-select: none;
+`;
+
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 350px;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 `;
 
 const ArrowButton = styled.button`
   width: 30px;
   height: 30px;
-  background-color: ${({ theme }) => theme.colorPallte.gray200};
-  opacity: 0.5;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.colorPallte.gray200};
+  opacity: 0.5;
+  border-radius: 50%;
 `;
 
 const DotWrapper = styled.div`

@@ -1,12 +1,11 @@
 import { styled } from "styled-components";
-import Header from "./components/Header";
-import GalleryList from "./components/gallery/GalleryList";
+import Header from "./components/Header/Header";
+import GalleryList from "./components/galleryList/GalleryList";
 import { useModal } from "./contexts/ModalProvider";
 import Carousel from "./components/carousel/Carousel";
-import GalleryItem from "./components/gallery/GalleryItem";
 import { useState } from "react";
-import { PhotoAPI } from "./components/apis/photo";
-import { GetPhotoDTO, PhotoItem } from "./components/types/photo";
+import { PhotoAPI } from "./apis/photo";
+import { GetPhotoDTO, PhotoItem } from "./types/photo";
 import useIntersect from "./hooks/useIntersect";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
 
   const convertPhotos = (photos: GetPhotoDTO[]): PhotoItem[] => {
     return photos.map((photo) => {
-      return { src: photo.urls.regular, alt: photo.description };
+      return { src: photo.urls.regular, alt: photo.alt_description };
     });
   };
 
@@ -55,9 +54,9 @@ function App() {
     <Container>
       <Header />
       <Warpper>
-        <Carousel autoPlay={true}>
+        <Carousel autoPlay={false}>
           {carouselPhotos.map((img) => (
-            <GalleryItem key={img.title} src={img.src} alt={img.alt} />
+            <Image key={img.src} src={img.src} alt={img.alt} />
           ))}
         </Carousel>
         <ListWrapper>
@@ -84,7 +83,6 @@ const Container = styled.div``;
 
 const Warpper = styled.div`
   width: 100%;
-
   padding: 0 30px;
 `;
 
@@ -94,4 +92,10 @@ const ListWrapper = styled.div`
 
 const LastColumn = styled.div`
   height: 10px;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

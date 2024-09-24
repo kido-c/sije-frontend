@@ -4,9 +4,10 @@ import GalleryList from "./components/gallery/GalleryList";
 import { useModal } from "./contexts/ModalProvider";
 import Carousel from "./components/carousel/Carousel";
 import GalleryItem from "./components/gallery/GalleryItem";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PhotoAPI } from "./components/apis/photo";
 import { GetPhotoDTO, PhotoItem } from "./components/types/photo";
+import useIntersect from "./hooks/useIntersect";
 
 function App() {
   const { openModal } = useModal();
@@ -38,10 +39,17 @@ function App() {
     });
   };
 
-  useEffect(() => {
-    // todo: 무한 스크롤 구현
-    getRandomPhotos();
-  }, []);
+  const inifiniteRef = useIntersect({
+    onIntersect: async (entry, observer) => {
+      // 50 request / 1hour 를 조절하기 위해서 5회 요청 후에는 무한 스크롤 멈춤
+      if (galleryPhotos.length >= 30 * 5) {
+        // observer 와 target element 연결 해제
+        observer.unobserve(entry.target);
+      } else {
+        getRandomPhotos();
+      }
+    },
+  });
 
   return (
     <Container>
@@ -49,7 +57,7 @@ function App() {
       <Warpper>
         <Carousel autoPlay={true}>
           {carouselPhotos.map((img) => (
-            <GalleryItem key={img.title} src={img.src} alt="" />
+            <GalleryItem key={img.title} src={img.src} alt={img.alt} />
           ))}
         </Carousel>
         <ListWrapper>
@@ -64,6 +72,7 @@ function App() {
             })}
           />
         </ListWrapper>
+        <LastColumn ref={inifiniteRef} />
       </Warpper>
     </Container>
   );
@@ -75,10 +84,14 @@ const Container = styled.div``;
 
 const Warpper = styled.div`
   width: 100%;
-  height: 100vh;
+
   padding: 0 30px;
 `;
 
 const ListWrapper = styled.div`
   margin-top: 20px;
+`;
+
+const LastColumn = styled.div`
+  height: 10px;
 `;

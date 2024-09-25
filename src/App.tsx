@@ -17,16 +17,14 @@ function App() {
 
   const [galleryPhotos, setGalleryPhotos] = useState<PhotoItem[]>([]);
 
-  const { data, isSuccess, isLoading, fetchNextPage, error } = useInfiniteQuery(
-    {
-      queryKey: ["getRandomPhotos"],
-      queryFn: ({ pageParam }) => getRandomPhotos(pageParam, 30),
-      getNextPageParam: (_, pages) => {
-        return pages.length + 1;
-      },
-      initialPageParam: 1,
-    }
-  );
+  const { data, isSuccess, isLoading, fetchNextPage } = useInfiniteQuery({
+    queryKey: ["getRandomPhotos"],
+    queryFn: ({ pageParam }) => getRandomPhotos(pageParam, 30),
+    getNextPageParam: (_, pages) => {
+      return pages.length + 1;
+    },
+    initialPageParam: 1,
+  });
 
   const convertPhotos = (photos: GetPhotoDTO[]): PhotoItem[] => {
     return photos.map((photo) => {

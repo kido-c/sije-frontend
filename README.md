@@ -70,9 +70,16 @@ https://github.com/user-attachments/assets/2f7a5ebf-81e6-41e2-81b4-30107f9a69f9
 
 https://github.com/user-attachments/assets/8c7b4ce1-b511-4048-8e6b-efb0b6686cea
 
-## 반응형 
+### 반응형 
 
 https://github.com/user-attachments/assets/e62b6b6e-17b6-48c4-924a-e7c3dcf02357
+
+## 사용성 개선 (v1.1.0)
+### 로딩 스피너 적용
+
+
+https://github.com/user-attachments/assets/bc64d486-6c02-4f1d-871d-d336b2ea4b7e
+
 
 
 
